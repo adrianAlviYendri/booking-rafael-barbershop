@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "255230633950",
+    "project_id": "rafael-barber-shop",
+    "storage_bucket": "rafael-barber-shop.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:255230633950:android:c745c2e8f7338b3bd21f4f",
+        "android_client_info": {
+          "package_name": "com.example.rafael_barbershop_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxwccSceTKG2cwrEm150Dj23KY1WfAH7k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
