@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rafael_barbershop_app/bindings/main_bindings.dart';
 import 'package:rafael_barbershop_app/firebase_options.dart';
 import 'package:rafael_barbershop_app/routers/app_router.dart';
 import 'package:rafael_barbershop_app/routers/app_routes.dart';
@@ -21,10 +23,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    var statusUser = FirebaseAuth.instance.currentUser;
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.login.name,
+      initialRoute:
+          (statusUser != null) ? AppRoutes.main.name : AppRoutes.login.name,
       getPages: AppRouter.pages,
+      initialBinding: MainBinding(),
     );
   }
 }
