@@ -15,6 +15,7 @@ class AddMetodePembayaranScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
+        backgroundColor: Colors.blueGrey,
         title: const Text(
           'Kelola Metode Pembayaran',
           style: TextStyle(
@@ -156,7 +157,7 @@ class AddMetodePembayaranScreen extends StatelessWidget {
             },
           );
         },
-        backgroundColor: Colors.green.shade700,
+        backgroundColor: Colors.blueGrey,
         child: const Icon(
           Icons.add,
           size: 24,

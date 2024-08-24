@@ -12,7 +12,7 @@ class DetailDataCustomer extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Customer Details'),
-        backgroundColor: Colors.deepPurple, // AppBar color
+        backgroundColor: Colors.blueGrey, // AppBar color
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -23,7 +23,7 @@ class DetailDataCustomer extends StatelessWidget {
             Center(
               child: CircleAvatar(
                 radius: 50,
-                backgroundColor: Colors.deepPurple,
+                backgroundColor: Colors.blueGrey,
                 child: Icon(
                   Icons.person,
                   size: 60,
@@ -69,13 +69,13 @@ class DetailDataCustomer extends StatelessWidget {
         contentPadding: EdgeInsets.all(16),
         leading: Icon(
           icon,
-          color: Colors.deepPurple,
+          color: Colors.blueGrey,
         ),
         title: Text(
           title,
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            color: Colors.deepPurple,
+            color: Colors.blueGrey,
           ),
         ),
         subtitle: Text(value),

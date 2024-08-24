@@ -3,9 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rafael_barbershop_app/controller/main_controller.dart';
-import 'package:rafael_barbershop_app/screen/booking.dart';
-import 'package:rafael_barbershop_app/screen/hair_color.dart';
-import 'package:rafael_barbershop_app/screen/hair_style.dart';
+import 'package:rafael_barbershop_app/screen%20customer/booking.dart';
+import 'package:rafael_barbershop_app/screen%20customer/hair_color.dart';
+import 'package:rafael_barbershop_app/screen%20customer/hair_style.dart';
 import 'package:rafael_barbershop_app/widgets/drawer_home_widgets.dart';
 
 class HomeScreen extends StatelessWidget {

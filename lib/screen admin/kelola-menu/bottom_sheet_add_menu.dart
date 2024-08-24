@@ -4,9 +4,7 @@ import 'package:rafael_barbershop_app/component/app_eleveted_button_widgets.dart
 import 'package:rafael_barbershop_app/screen%20admin/kelola-menu/menu_controller.dart';
 
 class BottomSheetAddmenu extends StatelessWidget {
-  const BottomSheetAddmenu({
-    super.key,
-  });
+  const BottomSheetAddmenu({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,63 +12,56 @@ class BottomSheetAddmenu extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 150),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const Text(
+          Text(
             'Tambah Menu',
-            style: TextStyle(
-              fontSize: 30,
-              fontWeight: FontWeight.bold,
-            ),
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
           ),
-          const SizedBox(
-            height: 15,
-          ),
+          const SizedBox(height: 20),
           TextFormField(
             controller: controller.namaMenuController,
             decoration: InputDecoration(
-              labelText: 'nama menu',
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(30),
+              labelText: 'Nama Menu',
+              prefixIcon: const Icon(Icons.menu),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12.0),
               ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(30),
-              ),
+              contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
             ),
           ),
-          const SizedBox(
-            height: 10,
-          ),
+          const SizedBox(height: 15),
           TextFormField(
             controller: controller.hargaController,
+            keyboardType: TextInputType.number,
             decoration: InputDecoration(
-              labelText: 'harga',
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(30),
+              labelText: 'Harga',
+              prefixIcon: const Icon(Icons.attach_money),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12.0),
               ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(30),
-              ),
+              contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
             ),
           ),
-          const SizedBox(
-            height: 30,
-          ),
+          const SizedBox(height: 30),
           AppElevetedButtonWidgets(
             onPressed: () {
               controller.addDataMenu();
               Get.back();
             },
             elevation: 10,
-            borderRadius: BorderRadius.circular(30),
+            borderRadius: BorderRadius.circular(12.0),
             backgroundColor: Colors.blueGrey,
             shadowColor: Colors.black,
             child: const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+              padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 12.0),
               child: Text(
-                'save',
+                'Simpan',
                 style: TextStyle(
-                  fontSize: 21,
-                  color: Colors.black,
+                  fontSize: 18,
+                  color: Colors.white,
                 ),
               ),
             ),

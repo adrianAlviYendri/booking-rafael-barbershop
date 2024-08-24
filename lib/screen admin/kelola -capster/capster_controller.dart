@@ -1,9 +1,8 @@
-// ignore_for_file: unnecessary_overrides
+// ignore_for_file: unnecessary_overrides, avoid_print
 
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,9 +13,8 @@ class AddCapsterController extends GetxController {
   TextEditingController namaCapsterController = TextEditingController();
   var dataCapster = <CapsterModels>[].obs;
   final db = FirebaseFirestore.instance;
-  final picker = ImagePicker();
-  File? imageFile;
-  var pickedFile = Rx<PlatformFile?>(null);
+  final ImagePicker picker = ImagePicker();
+  var pickedFile = Rx<File?>(null);
   var isLoading = false.obs;
 
   @override
@@ -26,9 +24,9 @@ class AddCapsterController extends GetxController {
   }
 
   void selectImage() async {
-    final result = await FilePicker.platform.pickFiles();
-    if (result != null) {
-      pickedFile.value = result.files.first;
+    final picked = await picker.pickImage(source: ImageSource.gallery);
+    if (picked != null) {
+      pickedFile.value = File(picked.path);
     }
   }
 
@@ -36,11 +34,12 @@ class AddCapsterController extends GetxController {
     if (pickedFile.value == null) return;
 
     try {
-      final ref = FirebaseStorage.instance
-          .ref()
-          .child('image_capster/${pickedFile.value!.name}');
-      final taskSnapshot = await ref.putFile(File(pickedFile.value!.path!));
+      final ref = FirebaseStorage.instance.ref().child(
+          'image_capster/${DateTime.now().millisecondsSinceEpoch}_${pickedFile.value!.path.split('/').last}');
+      final taskSnapshot = await ref.putFile(pickedFile.value!);
       final imageUrlCapster = await taskSnapshot.ref.getDownloadURL();
+      print("Image uploaded successfully. URL: $imageUrlCapster");
+
       DocumentReference docRef = db.collection('capster').doc();
       String uniqueId = docRef.id;
 

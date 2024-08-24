@@ -1,18 +1,21 @@
+// ignore_for_file: avoid_print
+
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:file_picker/file_picker.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:rafael_barbershop_app/screen%20admin/kelola-hair-color/hair_color_models.dart';
 
 class HairColorController extends GetxController {
   TextEditingController namaHairColorController = TextEditingController();
   final FirebaseFirestore db = FirebaseFirestore.instance;
   var dataHairColor = <HairColorModels>[].obs;
-  var pickedFile = Rx<PlatformFile?>(null);
-  final picker = FilePicker.platform;
+
+  final ImagePicker picker = ImagePicker();
+  var pickedFile = Rx<File?>(null);
   var isLoading = false.obs;
 
   @override
@@ -23,9 +26,9 @@ class HairColorController extends GetxController {
 
   // Method to select an image from file picker
   void selectImageHairColor() async {
-    final result = await picker.pickFiles();
-    if (result != null) {
-      pickedFile.value = result.files.first;
+    final picked = await picker.pickImage(source: ImageSource.gallery);
+    if (picked != null) {
+      pickedFile.value = File(picked.path);
     }
   }
 
@@ -33,11 +36,11 @@ class HairColorController extends GetxController {
     if (pickedFile.value == null) return;
 
     try {
-      final ref = FirebaseStorage.instance
-          .ref()
-          .child('image_hair_color/${pickedFile.value!.name}');
-      final taskSnapshot = await ref.putFile(File(pickedFile.value!.path!));
+      final ref = FirebaseStorage.instance.ref().child(
+          'image_hair_color/${DateTime.now().millisecondsSinceEpoch}_${pickedFile.value!.path.split('/').last}');
+      final taskSnapshot = await ref.putFile(pickedFile.value!);
       final imageUrlHairColor = await taskSnapshot.ref.getDownloadURL();
+      print("Image uploaded successfully. URL: $imageUrlHairColor");
       DocumentReference docRef = db.collection('warna_rambut').doc();
       String uniqueId = docRef.id;
 

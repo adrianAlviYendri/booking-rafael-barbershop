@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rafael_barbershop_app/component/app_eleveted_button_widgets.dart';
@@ -42,8 +41,7 @@ class BottomSheetAddHairStyle extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           // Image selection or preview
-          Obx(() => controller.pickedFile.value != null &&
-                  controller.pickedFile.value!.path != null
+          Obx(() => controller.pickedFile.value != null
               ? Container(
                   height: 200,
                   width: double.infinity,
@@ -55,7 +53,7 @@ class BottomSheetAddHairStyle extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(15),
                     child: Image.file(
-                      File(controller.pickedFile.value!.path!),
+                      controller.pickedFile.value!,
                       width: double.infinity,
                       fit: BoxFit.cover,
                     ),

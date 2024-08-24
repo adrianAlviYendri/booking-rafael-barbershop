@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rafael_barbershop_app/controller/my_order_controller.dart';
 import 'package:rafael_barbershop_app/models/booking_models.dart';
-import 'package:rafael_barbershop_app/screen/detail_my_order_screen.dart';
+import 'package:rafael_barbershop_app/screen%20customer/detail_my_order.dart';
 
 class MyOrderScreen extends StatelessWidget {
   const MyOrderScreen({super.key});

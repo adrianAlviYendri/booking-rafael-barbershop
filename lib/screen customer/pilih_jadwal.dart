@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:rafael_barbershop_app/controller/booking_controller.dart';
 import 'package:rafael_barbershop_app/routers/app_routes.dart';
 import 'package:rafael_barbershop_app/screen%20admin/kelola%20-capster/capster_models.dart';
-import 'package:rafael_barbershop_app/screen/detail_booking.dart';
+import 'package:rafael_barbershop_app/screen%20customer/pilih_jam.dart';
 
 class DetailCapsterScreen extends StatelessWidget {
   final CapsterModels capster;
@@ -35,7 +35,7 @@ class DetailCapsterScreen extends StatelessWidget {
           ),
         ),
         title: Text(
-          'Detail Capster',
+          'Pilih Jadwal Booking',
           style: TextStyle(color: Colors.grey[300]),
         ),
         actions: [

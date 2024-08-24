@@ -3,9 +3,7 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
@@ -19,9 +17,8 @@ class BookingController extends GetxController {
   final RxList<String> timeList = RxList<String>([]);
 
   final db = FirebaseFirestore.instance;
-  final picker = ImagePicker();
-  File? imageFile;
-  var pickedFile = Rx<PlatformFile?>(null);
+  final ImagePicker picker = ImagePicker();
+  var pickedFile = Rx<File?>(null);
 
   @override
   void onInit() {
@@ -128,10 +125,10 @@ class BookingController extends GetxController {
     return result.docs.isNotEmpty;
   }
 
-  void selectImageBuktiPembayaran() async {
-    final result = await FilePicker.platform.pickFiles();
-    if (result != null) {
-      pickedFile.value = result.files.first;
+  void selectImageFile() async {
+    final picked = await picker.pickImage(source: ImageSource.gallery);
+    if (picked != null) {
+      pickedFile.value = File(picked.path);
     }
   }
 
@@ -146,23 +143,20 @@ class BookingController extends GetxController {
       String uid) async {
     final capster = selectedCapster.value;
     if (pickedFile.value == null) {
-      print("No file selected for payment proof."); // Debug log
+      print("No image selected for payment proof."); // Debug log
       return;
     }
     try {
-      print("Starting file upload..."); // Debug log
-      final ref = FirebaseStorage.instance
-          .ref()
-          .child('image_bukti_pembayaran/${pickedFile.value!.name}');
-      final taskSnapshot = await ref.putFile(File(pickedFile.value!.path!));
+      print("Starting image upload..."); // Debug log
+      final ref = FirebaseStorage.instance.ref().child(
+          'image_bukti_pembayaran/${DateTime.now().millisecondsSinceEpoch}_${pickedFile.value!.path.split('/').last}');
+      final taskSnapshot = await ref.putFile(pickedFile.value!);
       final imageUrlBuktiPembayaran = await taskSnapshot.ref.getDownloadURL();
 
-      print(
-          "File uploaded successfully. URL: $imageUrlBuktiPembayaran"); // Debug log
-
+      print("Image uploaded successfully. URL: $imageUrlBuktiPembayaran");
       if (capster != null) {
-        debugPrint('USERRRRRRRRR ID : $uid');
-        DocumentReference docRef = db.collection('bookingan').doc();
+        DocumentReference docRef =
+            FirebaseFirestore.instance.collection('bookingan').doc();
         String uniqueId = docRef.id;
         BookingModel booking = BookingModel(
           idBooking: uniqueId,
@@ -181,7 +175,7 @@ class BookingController extends GetxController {
           harga: harga,
           statusPembayaran: 'Pending',
         );
-        await db.collection('bookingan').doc(uniqueId).set(booking.toJson());
+        await docRef.set(booking.toJson());
         print("Booking added successfully to Firestore."); // Debug log
       }
     } catch (e) {

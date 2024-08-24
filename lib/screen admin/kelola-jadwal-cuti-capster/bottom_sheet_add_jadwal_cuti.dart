@@ -11,9 +11,8 @@ class BottomSheetAddJadwalCuti extends StatelessWidget {
         Get.put(JadwalCutiCapsterController());
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
+      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 150),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             'Tambah Jadwal Cuti Capster',
@@ -59,7 +58,8 @@ class BottomSheetAddJadwalCuti extends StatelessWidget {
                   controller.capsterController.text.isNotEmpty) {
                 controller.addJadwalCuti(controller.selectedDate!,
                     controller.capsterController.text);
-                Get.snackbar('Berhasil', 'Non-Working Day ditambahkan',
+                Get.back();
+                Get.snackbar('Berhasil', 'Jadwal Cuti Berhasil ditambahkan',
                     backgroundColor: Colors.greenAccent,
                     snackPosition: SnackPosition.BOTTOM);
                 controller.dateController.clear();
@@ -72,13 +72,17 @@ class BottomSheetAddJadwalCuti extends StatelessWidget {
                     snackPosition: SnackPosition.BOTTOM);
               }
             },
-            child: const Text('Tambahkan'),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.blueGrey,
-              padding: const EdgeInsets.symmetric(vertical: 14.0),
+              padding:
+                  const EdgeInsets.symmetric(vertical: 14.0, horizontal: 20),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.0),
+                borderRadius: BorderRadius.circular(15),
               ),
+            ),
+            child: const Text(
+              'Tambahkan',
+              style: TextStyle(color: Colors.white, fontSize: 15),
             ),
           ),
         ],

@@ -1,6 +1,7 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:rafael_barbershop_app/routers/app_routes.dart';
@@ -118,14 +119,40 @@ class ViewDetailBookingScreen extends StatelessWidget {
                             formattedDate),
                         _buildInfoRow(Icons.access_time, 'Jam', selectedTime),
                         _buildInfoRow(Icons.menu, 'Menu Booking', selectedMenu),
-                        _buildInfoRow(Icons.monetization_on, 'Total Pembayaran',
-                            'Rp$menuPrice'),
-                        const SizedBox(height: 20),
+                        _buildInfoRow(Icons.monetization_on, 'Harga Menu',
+                            'Rp.$menuPrice'),
                         _buildInfoRow(
                             Icons.person, 'Nama Pelanggan', namaLengkap),
                         _buildInfoRow(
                             Icons.phone, 'Nomor Handphone', nomorHandphone),
-                        const SizedBox(height: 20),
+                        Card(
+                          elevation: 5,
+                          color: Colors.orange[400],
+                          margin: const EdgeInsets.symmetric(vertical: 20),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 20),
+                              child: Wrap(
+                                children: [
+                                  Icon(
+                                    FontAwesomeIcons.moneyBillTransfer,
+                                    color: Colors.black,
+                                  ),
+                                  SizedBox(
+                                    width: 15,
+                                  ),
+                                  Text(
+                                    'Jumlah Yang Harus Di Transfer Rp.$menuPrice',
+                                    style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              )),
+                        ),
                         ElevatedButton(
                           onPressed: () {
                             Get.toNamed(

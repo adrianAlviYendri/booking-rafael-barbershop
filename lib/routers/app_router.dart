@@ -15,19 +15,19 @@ import 'package:rafael_barbershop_app/screen%20admin/kelola-jadwal-cuti-capster/
 import 'package:rafael_barbershop_app/screen%20admin/kelola-laporan-booking/laporan_per_bulan.dart';
 import 'package:rafael_barbershop_app/screen%20admin/kelola-laporan-booking/laporan_per_hari.dart';
 import 'package:rafael_barbershop_app/screen%20admin/kelola-laporan-booking/laporan_per_tahun.dart';
-import 'package:rafael_barbershop_app/screen/detail_booking.dart';
-import 'package:rafael_barbershop_app/screen/detail_capster.dart';
-import 'package:rafael_barbershop_app/screen/detail_my_order_screen.dart';
-import 'package:rafael_barbershop_app/screen/home.dart';
+import 'package:rafael_barbershop_app/screen%20customer/pilih_jam.dart';
+import 'package:rafael_barbershop_app/screen%20customer/pilih_jadwal.dart';
+import 'package:rafael_barbershop_app/screen%20customer/detail_my_order.dart';
+import 'package:rafael_barbershop_app/screen%20customer/home.dart';
 // import 'package:rafael_barbershop_app/screen%20admin/login_admin_screen.dart';
-import 'package:rafael_barbershop_app/screen/login.dart';
-import 'package:rafael_barbershop_app/screen/main_screen.dart';
-import 'package:rafael_barbershop_app/screen/my_order.dart';
-import 'package:rafael_barbershop_app/screen/pembayaran.dart';
-import 'package:rafael_barbershop_app/screen/profile.dart';
-import 'package:rafael_barbershop_app/screen/register.dart';
-import 'package:rafael_barbershop_app/screen/select_menu.dart';
-import 'package:rafael_barbershop_app/screen/view_detail_booking.dart';
+import 'package:rafael_barbershop_app/screen%20customer/login.dart';
+import 'package:rafael_barbershop_app/screen%20customer/main_screen.dart';
+import 'package:rafael_barbershop_app/screen%20customer/my_order.dart';
+import 'package:rafael_barbershop_app/screen%20customer/pembayaran.dart';
+import 'package:rafael_barbershop_app/screen%20customer/profile.dart';
+import 'package:rafael_barbershop_app/screen%20customer/register.dart';
+import 'package:rafael_barbershop_app/screen%20customer/select_menu.dart';
+import 'package:rafael_barbershop_app/screen%20customer/view_detail_booking.dart';
 
 class AppRouter {
   static final pages = [

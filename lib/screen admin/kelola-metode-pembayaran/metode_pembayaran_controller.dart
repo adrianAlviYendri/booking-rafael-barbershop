@@ -1,10 +1,8 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:rafael_barbershop_app/screen%20admin/kelola-metode-pembayaran/metode_pembayaran_models.dart';
@@ -15,9 +13,8 @@ class MetodePembayaranController extends GetxController {
 
   var dataPembayaran = <MetodePembayaranModels>[].obs;
   final db = FirebaseFirestore.instance;
-  final picker = ImagePicker();
-  File? imageFile;
-  var pickedFile = Rx<PlatformFile?>(null);
+  final ImagePicker picker = ImagePicker();
+  var pickedFile = Rx<File?>(null);
 
   @override
   void onInit() {
@@ -26,9 +23,9 @@ class MetodePembayaranController extends GetxController {
   }
 
   void selectImageMetode() async {
-    final result = await FilePicker.platform.pickFiles();
-    if (result != null) {
-      pickedFile.value = result.files.first;
+    final picked = await picker.pickImage(source: ImageSource.gallery);
+    if (picked != null) {
+      pickedFile.value = File(picked.path);
     }
   }
 
@@ -36,11 +33,11 @@ class MetodePembayaranController extends GetxController {
     if (pickedFile.value == null) return;
 
     try {
-      final ref = FirebaseStorage.instance
-          .ref()
-          .child('image_metode_pembayaran/${pickedFile.value!.name}');
-      final taskSnapshot = await ref.putFile(File(pickedFile.value!.path!));
+      final ref = FirebaseStorage.instance.ref().child(
+          'image_metode_pembayaran/${DateTime.now().millisecondsSinceEpoch}_${pickedFile.value!.path.split('/').last}');
+      final taskSnapshot = await ref.putFile(pickedFile.value!);
       final imageUrlPembayaran = await taskSnapshot.ref.getDownloadURL();
+      print("Image uploaded successfully. URL: $imageUrlPembayaran");
       DocumentReference docRef = db.collection('metode_pembayaran').doc();
       String uniqueId = docRef.id;
       final addPembayaranModels = MetodePembayaranModels(

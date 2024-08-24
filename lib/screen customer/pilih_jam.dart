@@ -38,7 +38,7 @@ class _DetailBookingState extends State<DetailBooking> {
         automaticallyImplyLeading: true,
         centerTitle: true,
         title: Text(
-          "Detail Booking",
+          "Pilih Jam Booking",
           style: TextStyle(color: Colors.grey[300]),
         ),
         backgroundColor: Colors.black,
@@ -223,47 +223,47 @@ class _DetailBookingState extends State<DetailBooking> {
                 },
               ),
             ),
-            const SizedBox(height: 32.0),
+            const SizedBox(height: 60.0),
             // Next Button
-            SizedBox(
-              width: 300,
-              height: 50,
-              child: AppElevetedButtonWidgets(
-                elevation: 0,
-                shadowColor: Colors.black,
-                backgroundColor: Colors.green,
-                borderRadius: BorderRadius.circular(12),
-                child: const Text(
-                  'Lanjut Ke Pilih Menu',
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.white,
-                  ),
-                ),
-                onPressed: () {
-                  if (selectedTime != null) {
-                    Get.toNamed(
-                      AppRoutes.selectMenu.name,
-                      arguments: {
-                        'date': widget.date,
-                        'time': selectedTime,
-                        'capsterName': widget.capster.namaCapster,
-                      },
-                    );
-                  } else {
-                    Get.snackbar(
-                      'Peringatan',
-                      'Silahkan pilih waktu terlebih dahulu',
-                      snackPosition: SnackPosition.BOTTOM,
-                      backgroundColor: Colors.orange,
-                      colorText: Colors.white,
-                    );
-                  }
-                },
-              ),
-            ),
-            const SizedBox(height: 16.0),
           ],
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: SizedBox(
+        width: 300,
+        height: 50,
+        child: AppElevetedButtonWidgets(
+          elevation: 0,
+          shadowColor: Colors.black,
+          backgroundColor: Colors.green,
+          borderRadius: BorderRadius.circular(12),
+          child: const Text(
+            'Lanjut Ke Pilih Menu',
+            style: TextStyle(
+              fontSize: 20,
+              color: Colors.white,
+            ),
+          ),
+          onPressed: () {
+            if (selectedTime != null) {
+              Get.toNamed(
+                AppRoutes.selectMenu.name,
+                arguments: {
+                  'date': widget.date,
+                  'time': selectedTime,
+                  'capsterName': widget.capster.namaCapster,
+                },
+              );
+            } else {
+              Get.snackbar(
+                'Peringatan',
+                'Silahkan pilih waktu terlebih dahulu',
+                snackPosition: SnackPosition.BOTTOM,
+                backgroundColor: Colors.orange,
+                colorText: Colors.white,
+              );
+            }
+          },
         ),
       ),
     );

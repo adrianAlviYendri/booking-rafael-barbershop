@@ -1,6 +1,4 @@
-// ignore_for_file: avoid_print, prefer_const_constructors, prefer_const_literals_to_create_immutables
-
-import 'dart:io';
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, avoid_print
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -32,69 +30,74 @@ class BottomSheetPembayaran extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var controllerBooking = Get.find<BookingController>();
     var controllerPembayaran = Get.put(PembayaranController());
+    var controllerBooking = Get.find<BookingController>();
     final screenSize = MediaQuery.of(context).size;
-
-    print("Building BottomSheetPembayaran");
 
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 50),
+        padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 20),
         child: Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              // Menampilkan gambar yang dipilih
               Obx(
-                () => controllerBooking.pickedFile.value != null &&
-                        controllerBooking.pickedFile.value!.path != null
+                () => controllerBooking.pickedFile.value != null
                     ? Container(
                         width: screenSize.width * 0.8,
-                        height: screenSize.height * 0.6,
+                        height: screenSize.height * 0.4,
                         decoration: BoxDecoration(
-                          color: Colors.grey,
-                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.grey[200],
+                          borderRadius: BorderRadius.circular(15),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black26,
+                              blurRadius: 10,
+                              offset: Offset(0, 5),
+                            ),
+                          ],
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(20),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(15),
                           child: Image.file(
-                            File(controllerBooking.pickedFile.value!.path!),
-                            width: double.infinity,
+                            controllerBooking.pickedFile.value!,
                             fit: BoxFit.contain,
                           ),
                         ),
                       )
                     : const Icon(
-                        Icons.payments_outlined,
+                        Icons.image,
                         size: 150,
+                        color: Colors.grey,
                       ),
               ),
               const SizedBox(height: 20),
+
+              // Tombol Pilih Gambar
               AppElevetedButtonWidgets(
                 onPressed: () {
-                  print("Pilih Bukti Pembayaran pressed");
-                  controllerBooking.selectImageBuktiPembayaran();
+                  print("Pilih image pressed");
+                  controllerBooking.selectImageFile();
                 },
-                backgroundColor: Colors.blueAccent, // Warna biru
+                backgroundColor: Colors.blueAccent,
                 elevation: 5,
                 borderRadius: BorderRadius.circular(10),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(Icons.photo_library,
-                        color: Colors.white), // Ikon galeri
+                    Icon(Icons.photo_library, color: Colors.white),
                     SizedBox(width: 8),
                     Text(
-                      'Choose File ',
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.white,
-                      ),
+                      'Choose Image',
+                      style: TextStyle(fontSize: 20, color: Colors.white),
                     ),
                   ],
                 ),
               ),
               const SizedBox(height: 20),
+
+              // Tombol Upload Gambar
               Obx(() {
                 return AppElevetedButtonWidgets(
                   onPressed: controllerBooking.pickedFile.value != null
@@ -130,10 +133,10 @@ class BottomSheetPembayaran extends StatelessWidget {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(Icons.check, color: Colors.white), // Ikon centang
+                      Icon(Icons.upload, color: Colors.white), // Ikon upload
                       SizedBox(width: 8),
                       Text(
-                        'Send File',
+                        'Upload Image',
                         style: TextStyle(
                           fontSize: 20,
                           color: Colors.white,

@@ -18,6 +18,7 @@ class KelolaJadwalCutiScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
+        backgroundColor: Colors.blueGrey,
         title: const Text(
           'Kelola Jadwal Cuti',
           style: TextStyle(
@@ -25,7 +26,6 @@ class KelolaJadwalCutiScreen extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        backgroundColor: Colors.deepPurple, // AppBar color
       ),
       body: Obx(
         () {
@@ -61,8 +61,7 @@ class KelolaJadwalCutiScreen extends StatelessWidget {
                   margin: const EdgeInsets.symmetric(vertical: 8.0),
                   elevation: 4,
                   child: ListTile(
-                    leading:
-                        Icon(Icons.calendar_today, color: Colors.deepPurple),
+                    leading: Icon(Icons.calendar_today, color: Colors.blueGrey),
                     title: Text(
                       'Capster: ${jadwal.namaCapster}',
                       style: TextStyle(fontWeight: FontWeight.bold),
@@ -95,7 +94,7 @@ class KelolaJadwalCutiScreen extends StatelessWidget {
             },
           );
         },
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: Colors.blueGrey,
         child: const Icon(
           Icons.add,
           size: 24,
